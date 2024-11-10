@@ -1,4 +1,5 @@
 import "./globals.css";
+import Layout from './components/layout';
 
 export const metadata = {
   title: "Mythic Chest",
@@ -9,7 +10,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <Layout>
+          {children}
+        </Layout>
       </body>
     </html>
   );
