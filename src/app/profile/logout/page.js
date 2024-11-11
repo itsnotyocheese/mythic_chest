@@ -9,7 +9,7 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.push('/profile/login'); // Redirect to login after logout
+    router.push('/'); // Redirect to login after logout
   };
 
   return (
