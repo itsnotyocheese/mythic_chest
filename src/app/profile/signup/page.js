@@ -25,15 +25,15 @@ const SignUpPage = () => {
       });
 
       // Redirect to login page after successful sign-up
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       setError(error.message);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div className="flex justify-center items-center ">
+      <div className="bg-white p-8 rounded-lg shadow-lg shadow-white max-w-md w-full  text-gray-950">
         <h1 className="text-2xl font-bold mb-4 text-center">Sign Up</h1>
         <form onSubmit={handleSignUp}>
           <div className="mb-4">
@@ -85,7 +85,7 @@ const SignUpPage = () => {
         </form>
         <p className="mt-4 text-sm text-center">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <a href="/profile/login" className="text-blue-500 hover:underline">
             Log In
           </a>
         </p>

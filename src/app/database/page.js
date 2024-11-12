@@ -34,16 +34,27 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <h1>All Games</h1>
-      <ul>
-        {games.map((game) => (
-          <li key={game.id}>
-            {game.name}
-            <button onClick={() => addUserGame(game.id)}>Add to My List</button>
-          </li>
+    <div className="container mx-auto p-8 bg-gray-50">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">All Games</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {games
+        .sort((a, b) => a.game_name.localeCompare(b.game_name)) // Sorting by game_name alphabetically
+        .map((game) => (
+          <div key={game.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">{game.game_name}</h2>
+            <p className="text-gray-600 mb-2"><strong>Category:</strong> {game.category}</p>
+            <p className="text-gray-600 mb-2"><strong>Players:</strong> {game.min_players} - {game.max_players}</p>
+            <p className="text-gray-600 mb-2"><strong>Average Play Time:</strong> {game.avg_play_time_minutes} minutes</p>
+            <p className="text-gray-600 mb-4"><strong>Co-op/Party vs:</strong> {game.coop_party_vs}</p>
+            <button
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              onClick={() => addUserGame(game.id)}
+            >
+              Add to My List
+            </button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
