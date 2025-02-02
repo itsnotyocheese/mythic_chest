@@ -10,9 +10,15 @@ export default function Home() {
   // Fetch all games
   useEffect(() => {
     const fetchGames = async () => {
-      const res = await fetch("/api/games");
-      const data = await res.json();
-      setGames(data);
+      try{
+        const res = await fetch("/api/games");
+        if (!res.ok) throw new Error ("help!")
+        const data = await res.json();
+        console.log("Fetched games:", data); // Debugging line
+        setGames(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Error fetching games: ", error);
+      } 
     };
     fetchGames();
   }, []);
@@ -37,7 +43,7 @@ export default function Home() {
     <div className="container mx-auto p-8 bg-gray-50">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">All Games</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {games
+        {Array.isArray(games) && games
         .sort((a, b) => a.game_name.localeCompare(b.game_name)) // Sorting by game_name alphabetically
         .map((game) => (
           <div key={game.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
